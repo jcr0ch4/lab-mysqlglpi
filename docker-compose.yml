@@ -1,0 +1,21 @@
+version: '1.0'
+php:
+  build: .
+  ports:
+   - "80:80"
+   - "443:443"
+  volumes:
+   - ./www:/var/www/html
+  links:
+   - db
+
+db:
+  image: mysql:5.7
+  volumes:
+   - ./var:/var/lib/mysql
+  environment:
+   - MYSQL_ROOT_PASSWORD=SenhaRoot
+   - MYSQL_DATABASE=helpdesk
+   - MYSQL_USER=glpi
+   - MYSQL_PASSWORD=SenhaDB
+   - MYSQL_ALLOW_EMPTY_PASSWORD=no
